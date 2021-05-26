@@ -24,9 +24,14 @@ function CreateBook() {
   };
 
   function handleClick(event) {
-    axios.post("http://localhost:8000/api/books", book).then(function(res){
+    axios
+      .post("http://localhost:8000/api/books", book)
+      .then(function(res){
       window.location = "/";
-    });
+    })
+      .catch(function(err) {
+        console.log("Error in CreateBook!");
+    })
     event.preventDefault();
   };
 

@@ -18,15 +18,25 @@ function ShowBookDetails(){
   const id = url.split('/')[4];
 
 useEffect(function(){
- axios.get("http://localhost:8000/api/books/" + id).then(function(res){
+ axios
+  .get("http://localhost:8000/api/books/" + id)
+  .then(function(res){
       setThisBook(res.data[0]);
-    });
+    })
+  .catch(function(err) {
+      console.log("Error in ShowBookDetails!");
+    })
   });
 
   function deleteBook () {
-    axios.delete("http://localhost:8000/api/books/" + id).then(function(res){
+    axios
+      .delete("http://localhost:8000/api/books/" + id)
+      .then(function(res){
       window.location = "/";
-    });
+    })
+      .catch(function(err) {
+      console.log("Error in ShowBookDetails!");
+    })
   };
 
   let BookItem =
@@ -91,7 +101,10 @@ useEffect(function(){
           </div>
 
           <div className="row">
-            <div className="col-md-12">
+            <div className="col-md-6">
+              <Link to={"/edit-book/" + id} className="btn btn-outline-warning btn-lg btn-block">Edit Book</Link><br />
+              </div>
+            <div className="col-md-6">
               <button type="button" className="btn btn-outline-danger btn-lg btn-block" onClick={deleteBook}>Delete Book</button><br />
             </div>
               <br />

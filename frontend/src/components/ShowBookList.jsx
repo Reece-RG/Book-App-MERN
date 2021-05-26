@@ -9,8 +9,13 @@ function ShowBookList () {
 const [books, setBooks] = useState([]);
 
 useEffect(function(){
-  axios.get("http://localhost:8000/api/books").then(function(res){
+  axios
+    .get("http://localhost:8000/api/books")
+    .then(function(res){
     setBooks(res.data);
+  })
+    .catch(function(err) {
+      console.log("Error in ShowBookList!");
   });
 });
 

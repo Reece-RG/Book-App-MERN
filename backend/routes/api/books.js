@@ -38,6 +38,16 @@ router.post("/", function(req, res){ //Add book to database
   });
 });
 
+router.put("/:id", function(req, res){
+  Book.findOneAndUpdate({_id: req.params.id}, req.body, function(err){
+    if (!err) {
+      res.json({msg: "Book updated successfully."});
+    } else {
+      res.status(400).json({msg: "Unable to update book."});
+    }
+  });
+});
+
 router.delete("/:id", function(req, res){ //Delete book
   Book.deleteOne({_id: req.params.id}, function(err){
     if (!err) {
