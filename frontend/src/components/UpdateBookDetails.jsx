@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom';
 import '../App.css';
 import axios from 'axios';
 
-class UpdateBookDetails extends Component {
+class UpdateBookDetails extends Component { //use of class component as had difficulties using functional component to modify received data in inputs
   constructor(props){
     super(props);
-    this.state = {
+    this.state = { //initialising object properties
       title: "",
       isbn: "",
       author: "",
@@ -18,9 +18,9 @@ class UpdateBookDetails extends Component {
 
   componentDidMount(){
     axios
-    .get("http://localhost:8000/api/books/"+ window.location.href.split("/").[4])
+    .get("http://localhost:8000/api/books/"+ window.location.href.split("/").[4]) //received data via get request
     .then(res => {
-      this.setState({
+      this.setState({ //using data from first slice
         title: res.data[0].title,
         isbn: res.data[0].isbn,
         author: res.data[0].author,
@@ -35,12 +35,12 @@ class UpdateBookDetails extends Component {
   };
 
   onChange = event => {
-    this.setState({[event.target.name]: event.target.value});
+    this.setState({[event.target.name]: event.target.value}); //set targeted input to current value
   };
 
   onSubmit = event => {
     event.preventDefault();
-    const data = {
+    const data = { //defining data package to be sent
       title: this.state.title,
       isbn: this.state.isbn,
       author: this.state.author,
@@ -49,9 +49,9 @@ class UpdateBookDetails extends Component {
       publisher: this.state.publisher
     };
     axios
-      .put("http://localhost:8000/api/books/" + window.location.href.split("/").[4], data)
+      .put("http://localhost:8000/api/books/" + window.location.href.split("/").[4], data) //HTTP request to amend current book
       .then(function(res){
-        window.location = "/";
+        window.location = "/"; //redirect to homepage
       })
       .catch(err => {
         console.log("Error in UpdateBookInfo!");

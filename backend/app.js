@@ -1,12 +1,10 @@
 const express = require('express');
 const app = express();
-const mongoose = require('mongoose');
 var cors = require('cors');
-mongoose.connect("mongodb://localhost:27017/bookDB", {useNewUrlParser: true});
 
-app.use(cors({ origin: true, credentials: true }));
+app.use(cors({ origin: true, credentials: true })); //Use cors to bypass http request obstacles
 app.use(express.json({ extended: false }));
-app.use("/api/books", require("./routes/api/books.js"));
+app.use("/api/books", require("./routes/api/books.js")); //use books.js file
 
 app.get("/", function(req, res){
   res.send("Hello World");

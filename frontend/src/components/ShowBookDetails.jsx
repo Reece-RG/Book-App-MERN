@@ -5,7 +5,7 @@ import axios from 'axios';
 
 function ShowBookDetails(){
 
-  const [thisBook, setThisBook] = useState({
+  const [thisBook, setThisBook] = useState({ //hook into thisBook object, specifying properties
     title: "",
     isbn: "",
     author: "",
@@ -15,13 +15,13 @@ function ShowBookDetails(){
   });
 
   const url = window.location.href;
-  const id = url.split('/')[4];
+  const id = url.split('/')[4]; //recuperate id section of url address
 
 useEffect(function(){
  axios
-  .get("http://localhost:8000/api/books/" + id)
+  .get("http://localhost:8000/api/books/" + id) //get request
   .then(function(res){
-      setThisBook(res.data[0]);
+      setThisBook(res.data[0]); //import data from first slice in array
     })
   .catch(function(err) {
       console.log("Error in ShowBookDetails!");
@@ -30,9 +30,9 @@ useEffect(function(){
 
   function deleteBook () {
     axios
-      .delete("http://localhost:8000/api/books/" + id)
+      .delete("http://localhost:8000/api/books/" + id) //delete request
       .then(function(res){
-      window.location = "/";
+      window.location = "/"; //redirect to homepage
     })
       .catch(function(err) {
       console.log("Error in ShowBookDetails!");
@@ -102,7 +102,7 @@ useEffect(function(){
 
           <div className="row">
             <div className="col-md-6">
-              <Link to={"/edit-book/" + id} className="btn btn-outline-warning btn-lg btn-block">Edit Book</Link><br />
+              <Link to={"/edit-book/" + id} className="btn btn-outline-success btn-lg btn-block">Edit Book</Link><br />
               </div>
             <div className="col-md-6">
               <button type="button" className="btn btn-outline-danger btn-lg btn-block" onClick={deleteBook}>Delete Book</button><br />

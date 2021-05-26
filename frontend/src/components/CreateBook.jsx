@@ -4,7 +4,7 @@ import '../App.css';
 import axios from 'axios';
 
 function CreateBook() {
-  const [book, setBook] = useState({
+  const [book, setBook] = useState({ //hook into book object with defined properties
     title: "",
     isbn: "",
     author: "",
@@ -13,7 +13,7 @@ function CreateBook() {
     publisher: ""
   });
 
-  function handleChange(event) {
+  function handleChange(event) { //change value of input via spread operator
     const {name, value} = event.target;
     setBook(function(prevValues){
       return ({
@@ -25,9 +25,9 @@ function CreateBook() {
 
   function handleClick(event) {
     axios
-      .post("http://localhost:8000/api/books", book)
+      .post("http://localhost:8000/api/books", book) //post request with book data
       .then(function(res){
-      window.location = "/";
+      window.location = "/"; //redirect to homepage
     })
       .catch(function(err) {
         console.log("Error in CreateBook!");

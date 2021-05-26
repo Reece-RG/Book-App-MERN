@@ -1,7 +1,7 @@
 const express = require('express');
-const router = express.Router();
+const router = express.Router(); 
 const mongoose = require('mongoose');
-mongoose.connect("mongodb://localhost:27017/bookDB", {useNewUrlParser: true});
+mongoose.connect("mongodb://localhost:27017/bookDB", {useNewUrlParser: true}); //connect to mongdb database
 const bodyParser = require('body-parser');
 
 const Book = require('../../model/Book.js'); //Load Book model
@@ -38,7 +38,7 @@ router.post("/", function(req, res){ //Add book to database
   });
 });
 
-router.put("/:id", function(req, res){
+router.put("/:id", function(req, res){ //Modifiy book in database
   Book.findOneAndUpdate({_id: req.params.id}, req.body, function(err){
     if (!err) {
       res.json({msg: "Book updated successfully."});
